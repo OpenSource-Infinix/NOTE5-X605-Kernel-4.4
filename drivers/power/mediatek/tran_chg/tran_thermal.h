@@ -1,0 +1,109 @@
+/*****************************************************************************
+ *
+ * Filename:
+ * ---------
+ *   tran_thermal.h
+ *
+ * Project:
+ * --------
+ *   Kernel_Software
+ *
+ * Description:
+ * ------------
+ *   This Module is For Custom Transsion Thermal
+ *
+ * Author:
+ * -------
+ *
+ *
+ ****************************************************************************/
+#ifndef __TRAN_THERMAL_H__
+#define __TRAN_THERMAL_H__
+
+#include <mt-plat/battery_meter_hal.h>
+#include <mt-plat/charger_class.h>
+#include <mt-plat/mtk_boot_common.h>
+#include <mtk_charger_intf.h>
+
+
+#if defined(TRAN_X604)
+#define THERMAL_TAG	"X604_thermal"
+#define TRAN_PCB_DROP_TEMP_STEP_ONE        45000
+#define TRAN_PCB_DROP_CUR_STEP_ONE    500
+#define TRAN_PCB_DROP_TEMP_STEP_TWO        47000
+#define TRAN_PCB_DROP_CUR_STEP_TWO    1200
+#define TRAN_MIN_CHARGING_CURRENT       800000
+#define TRAN_CALL_DROP_CURRENT	1400000
+#define TRAN_SCREEN_DROP_CURRENT	1500000
+/*JEITA*/
+#define JEITA_TEMP_BELOW_T0_AC_CHG_CURRENT  0
+#define JEITA_TEMP_T0_TO_T1_AC_CHG_CURRENT  900000
+#define JEITA_TEMP_T2_TO_T3_AC_CHG_CURRENT  3000000
+#define JEITA_TEMP_T3_TO_T4_AC_CHG_CURRENT  1000000
+#define JEITA_TEMP_ABOVE_T4_AC_CHG_CURRENT  0
+
+#define JEITA_TEMP_BELOW_T0_AC_CHG_CURRENT_INPUT  1500000
+#define JEITA_TEMP_T0_TO_T1_AC_CHG_CURRENT_INPUT  1500000
+#define JEITA_TEMP_T2_TO_T3_AC_CHG_CURRENT_INPUT  2000000
+#define JEITA_TEMP_T3_TO_T4_AC_CHG_CURRENT_INPUT  1500000
+#define JEITA_TEMP_ABOVE_T4_AC_CHG_CURRENT_INPUT  1000000
+
+#elif defined(TRAN_X605)
+#define THERMAL_TAG	"X605_thermal"
+#define TRAN_PCB_DROP_TEMP_STEP_ONE        44000
+#define TRAN_PCB_DROP_CUR_STEP_ONE    1500
+#define TRAN_PCB_DROP_TEMP_STEP_TWO        45000
+#define TRAN_PCB_DROP_CUR_STEP_TWO    300
+#define TRAN_MIN_CHARGING_CURRENT       1000000
+#define TRAN_CALL_DROP_CURRENT	1400000
+#define TRAN_SCREEN_DROP_CURRENT	2000000
+/*JEITA*/
+#define JEITA_TEMP_BELOW_T0_AC_CHG_CURRENT  0
+#define JEITA_TEMP_T0_TO_T1_AC_CHG_CURRENT  800000
+#define JEITA_TEMP_T2_TO_T3_AC_CHG_CURRENT  3000000
+#define JEITA_TEMP_T3_TO_T4_AC_CHG_CURRENT  2000000
+#define JEITA_TEMP_ABOVE_T4_AC_CHG_CURRENT  0
+
+#define JEITA_TEMP_BELOW_T0_AC_CHG_CURRENT_INPUT  1500000
+#define JEITA_TEMP_T0_TO_T1_AC_CHG_CURRENT_INPUT  1500000
+#define JEITA_TEMP_T2_TO_T3_AC_CHG_CURRENT_INPUT  2000000
+#define JEITA_TEMP_T3_TO_T4_AC_CHG_CURRENT_INPUT  2000000
+#define JEITA_TEMP_ABOVE_T4_AC_CHG_CURRENT_INPUT  1000000
+
+#else
+#define THERMAL_TAG	"default_thermal"
+#define TRAN_PCB_DROP_TEMP_STEP_ONE        41000
+#define TRAN_PCB_DROP_CUR_STEP_ONE    600
+#define TRAN_PCB_DROP_TEMP_STEP_TWO        42000
+#define TRAN_PCB_DROP_CUR_STEP_TWO    200
+#define TRAN_MIN_CHARGING_CURRENT       1000000
+#define TRAN_CALL_DROP_CURRENT	1400000
+#define TRAN_SCREEN_DROP_CURRENT	2000000
+/*JEITA*/
+#define JEITA_TEMP_BELOW_T0_AC_CHG_CURRENT  0
+#define JEITA_TEMP_T0_TO_T1_AC_CHG_CURRENT  1000000
+#define JEITA_TEMP_T2_TO_T3_AC_CHG_CURRENT  2000000
+#define JEITA_TEMP_T3_TO_T4_AC_CHG_CURRENT  1000000
+#define JEITA_TEMP_ABOVE_T4_AC_CHG_CURRENT  0
+
+#define JEITA_TEMP_BELOW_T0_AC_CHG_CURRENT_INPUT  0
+#define JEITA_TEMP_T0_TO_T1_AC_CHG_CURRENT_INPUT  1000000
+#define JEITA_TEMP_T2_TO_T3_AC_CHG_CURRENT_INPUT  2000000
+#define JEITA_TEMP_T3_TO_T4_AC_CHG_CURRENT_INPUT  1000000
+#define JEITA_TEMP_ABOVE_T4_AC_CHG_CURRENT_INPUT  0
+
+#endif
+
+#define THERMAL_LOG_CRTI 1
+#define THERMAL_LOG_FULL 2
+#define THERMAL_LOG_DEBG 3
+
+#define tran_thml_log(num, fmt, args...) \
+do{ \
+	if (TRAN_THERMAL_LOG >= (int)num) {\
+        pr_notice(THERMAL_TAG);   \
+        pr_notice(fmt, ##args); \
+    }   \
+} while (0)
+
+#endif	/*__TRAN_THERMAL_H__*/
